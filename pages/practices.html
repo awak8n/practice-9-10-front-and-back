@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Практики</title>
+    <title>Практики - Образовательные материалы</title>
     <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
     <div class="page-container">
-        <header class="header">Хэдер</header>
+        <header class="header">
+            <h1>Образовательная платформа</h1>
+            <div class="header-actions">
+                <button class="btn-progress" onclick="showProgress()">📊 Мой прогресс</button>
+            </div>
+        </header>
+        
         <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
@@ -18,15 +24,880 @@
                 <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
             </ul>
         </nav>
+        
         <main class="content">
-            <h1 class="page-title">Практики</h1>
-            <div class="card text-center">
-                <h2 class="section-title">Раздел в разработке</h2>
-                <p>Раздел практик находится в разработке.</p>
-                <p>Скоро здесь появятся материалы для практических занятий.</p>
+            <!-- Приветственный баннер -->
+            <div class="practices-hero card">
+                <div class="hero-content">
+                    <h1 class="page-title">Практические занятия</h1>
+                    <p class="hero-subtitle">Освойте новые навыки через практику и реальные проекты</p>
+                    <div class="progress-overview">
+                        <div class="progress-item">
+                            <span class="progress-number" id="completedPractices">0</span>
+                            <span class="progress-label">Пройдено практик</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-number" id="totalPractices">12</span>
+                            <span class="progress-label">Всего практик</span>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-number" id="successRate">0%</span>
+                            <span class="progress-label">Успеваемость</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Навигация по категориям -->
+            <div class="categories-nav card">
+                <h2 class="section-title">Категории практик</h2>
+                <div class="categories-grid">
+                    <button class="category-btn active" data-category="all" onclick="filterPractices('all')">
+                        <span class="category-icon">📚</span>
+                        Все практики
+                    </button>
+                    <button class="category-btn" data-category="web" onclick="filterPractices('web')">
+                        <span class="category-icon">🌐</span>
+                        Веб-разработка
+                    </button>
+                    <button class="category-btn" data-category="design" onclick="filterPractices('design')">
+                        <span class="category-icon">🎨</span>
+                        Дизайн
+                    </button>
+                    <button class="category-btn" data-category="programming" onclick="filterPractices('programming')">
+                        <span class="category-icon">💻</span>
+                        Программирование
+                    </button>
+                    <button class="category-btn" data-category="data" onclick="filterPractices('data')">
+                        <span class="category-icon">📊</span>
+                        Анализ данных
+                    </button>
+                    <button class="category-btn" data-category="mobile" onclick="filterPractices('mobile')">
+                        <span class="category-icon">📱</span>
+                        Мобильная разработка
+                    </button>
+                </div>
+            </div>
+
+            <!-- Панель поиска и фильтров -->
+            <div class="practices-controls card">
+                <div class="controls-row">
+                    <div class="search-box">
+                        <input type="text" id="practiceSearch" placeholder="Поиск практик..." class="search-input">
+                        <button class="search-btn" onclick="searchPractices()">🔍</button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <select id="difficultyFilter" onchange="filterPractices()">
+                            <option value="all">Любая сложность</option>
+                            <option value="beginner">Начальный</option>
+                            <option value="intermediate">Средний</option>
+                            <option value="advanced">Продвинутый</option>
+                        </select>
+                        
+                        <select id="durationFilter" onchange="filterPractices()">
+                            <option value="all">Любая длительность</option>
+                            <option value="short">Короткие (< 1 час)</option>
+                            <option value="medium">Средние (1-3 часа)</option>
+                            <option value="long">Длинные (> 3 часов)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="sort-group">
+                    <label>Сортировка:</label>
+                    <select id="sortPractices" onchange="sortPractices()">
+                        <option value="popular">По популярности</option>
+                        <option value="difficulty">По сложности</option>
+                        <option value="duration">По длительности</option>
+                        <option value="rating">По рейтингу</option>
+                        <option value="newest">Сначала новые</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Сетка практик -->
+            <div class="practices-grid" id="practicesGrid">
+                <!-- Практики будут загружены через JavaScript -->
+            </div>
+
+            <!-- Статистика обучения -->
+            <div class="learning-stats card">
+                <h2 class="section-title">Ваша статистика обучения</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalTime">0ч 0м</span>
+                            <span class="stat-label">Общее время обучения</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="currentStreak">0</span>
+                            <span class="stat-label">Дней подряд</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="averageRating">0.0</span>
+                            <span class="stat-label">Средний рейтинг</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="completionRate">0%</span>
+                            <span class="stat-label">Прохождение</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Рекомендации -->
+            <div class="recommendations card">
+                <h2 class="section-title">Рекомендуемые практики</h2>
+                <div class="recommendations-grid" id="recommendationsGrid">
+                    <!-- Рекомендации -->
+                </div>
             </div>
         </main>
-        <footer class="footer">Футер</footer>
+
+        <!-- Модальное окно практики -->
+        <div class="modal" id="practiceModal">
+            <div class="modal-content large-modal">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <div class="modal-body" id="modalBody">
+                    <!-- Контент практики -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно прогресса -->
+        <div class="modal" id="progressModal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeProgressModal()">&times;</span>
+                <div class="progress-body">
+                    <h2>📊 Ваш прогресс обучения</h2>
+                    <div class="progress-charts">
+                        <div class="chart-container">
+                            <h3>Прогресс по категориям</h3>
+                            <div class="category-progress" id="categoryProgress">
+                                <!-- Прогресс по категориям -->
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Активность обучения</h3>
+                            <div class="activity-chart" id="activityChart">
+                                <!-- График активности -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="achievements">
+                        <h3>🏆 Достижения</h3>
+                        <div class="achievements-list" id="achievementsList">
+                            <!-- Список достижений -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Образовательная платформа</h3>
+                    <p>Практическое обучение для реальных навыков</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="filterPractices('web')">Веб-разработка</a></li>
+                        <li><a href="#" onclick="filterPractices('design')">Дизайн</a></li>
+                        <li><a href="#" onclick="filterPractices('programming')">Программирование</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Поддержка</h3>
+                    <p>📧 support@learn.ru</p>
+                    <p>🕒 Ежедневно 9:00-21:00</p>
+                </div>
+            </div>
+        </footer>
     </div>
-</body>
-</html>
+
+    <script>
+        // Данные практик
+        const practicesData = [
+            {
+                id: 1,
+                title: "Создание адаптивного лендинга",
+                description: "Научитесь создавать современные адаптивные лендинги с использованием HTML5, CSS3 и JavaScript. Практика включает работу с Flexbox и Grid.",
+                category: "web",
+                difficulty: "beginner",
+                duration: 120,
+                rating: 4.8,
+                students: 1247,
+                completed: 890,
+                materials: ["HTML шаблон", "CSS стили", "JavaScript код", "Дизайн макет"],
+                requirements: ["Базовые знания HTML/CSS", "Текстовый редактор"],
+                steps: [
+                    "Создание базовой HTML структуры",
+                    "Стилизация с помощью CSS",
+                    "Добавление адаптивности",
+                    "Внедрение интерактивных элементов"
+                ],
+                featured: true,
+                image: "../images/practice1.jpg",
+                tags: ["HTML", "CSS", "Адаптивность", "Лендинг"]
+            },
+            {
+                id: 2,
+                title: "Разработка REST API на Node.js",
+                description: "Освойте создание RESTful API с использованием Node.js, Express и MongoDB. Практика охватывает CRUD операции и аутентификацию.",
+                category: "programming",
+                difficulty: "intermediate",
+                duration: 180,
+                rating: 4.9,
+                students: 856,
+                completed: 567,
+                materials: ["Исходный код", "Документация API", "Тестовые данные"],
+                requirements: ["Базовые знания JavaScript", "Установленный Node.js"],
+                steps: [
+                    "Настройка Express сервера",
+                    "Подключение к MongoDB",
+                    "Создание CRUD endpoints",
+                    "Реализация JWT аутентификации"
+                ],
+                featured: true,
+                image: "../images/practice2.jpg",
+                tags: ["Node.js", "Express", "MongoDB", "REST API"]
+            },
+            {
+                id: 3,
+                title: "Анализ данных с Pandas",
+                description: "Практический курс по анализу данных с использованием библиотеки Pandas. Работа с реальными датасетами и визуализация результатов.",
+                category: "data",
+                difficulty: "beginner",
+                duration: 90,
+                rating: 4.7,
+                students: 1543,
+                completed: 1023,
+                materials: ["Jupyter ноутбук", "Датасеты", "Шаблоны анализа"],
+                requirements: ["Базовый Python", "Установленный Jupyter"],
+                steps: [
+                    "Загрузка и очистка данных",
+                    "Анализ и агрегация",
+                    "Визуализация результатов",
+                    "Формирование выводов"
+                ],
+                featured: false,
+                image: "../images/practice3.jpg",
+                tags: ["Python", "Pandas", "Анализ данных", "Визуализация"]
+            },
+            {
+                id: 4,
+                title: "Создание мобильного приложения на React Native",
+                description: "Разработайте кроссплатформенное мобильное приложение с использованием React Native. Практика включает навигацию и работу с API.",
+                category: "mobile",
+                difficulty: "intermediate",
+                duration: 240,
+                rating: 4.6,
+                students: 723,
+                completed: 412,
+                materials: ["Исходный код", "Документация", "Иконки и assets"],
+                requirements: ["Знание React", "Установленный Node.js"],
+                steps: [
+                    "Настройка окружения React Native",
+                    "Создание основных экранов",
+                    "Реализация навигации",
+                    "Интеграция с внешним API"
+                ],
+                featured: true,
+                image: "../images/practice4.jpg",
+                tags: ["React Native", "Мобильная разработка", "JavaScript"]
+            },
+            {
+                id: 5,
+                title: "Дизайн UI/UX для веб-приложения",
+                description: "Освойте процесс проектирования пользовательского интерфейса и опыта. От исследования до готового прототипа в Figma.",
+                category: "design",
+                difficulty: "beginner",
+                duration: 150,
+                rating: 4.5,
+                students: 987,
+                completed: 654,
+                materials: ["Figma файл", "UI kit", "Шаблоны компонентов"],
+                requirements: ["Базовое понимание дизайна", "Figma аккаунт"],
+                steps: [
+                    "Проведение пользовательского исследования",
+                    "Создание wireframes",
+                    "Разработка визуального дизайна",
+                    "Создание интерактивного прототипа"
+                ],
+                featured: false,
+                image: "../images/practice5.jpg",
+                tags: ["Figma", "UI/UX", "Дизайн", "Прототипирование"]
+            },
+            {
+                id: 6,
+                title: "Оптимизация производительности веб-сайта",
+                description: "Узнайте методы оптимизации загрузки и производительности веб-сайтов. Практика включает работу с Lighthouse и Web Vitals.",
+                category: "web",
+                difficulty: "advanced",
+                duration: 120,
+                rating: 4.9,
+                students: 456,
+                completed: 289,
+                materials: ["Инструменты анализа", "Чек-листы", "Примеры кода"],
+                requirements: ["Продвинутые знания веб-разработки"],
+                steps: [
+                    "Анализ текущей производительности",
+                    "Оптимизация изображений",
+                    "Минификация кода",
+                    "Кэширование и CDN"
+                ],
+                featured: false,
+                image: "../images/practice6.jpg",
+                tags: ["Оптимизация", "Производительность", "Lighthouse"]
+            }
+        ];
+
+        let userProgress = JSON.parse(localStorage.getItem('userProgress')) || {
+            completed: [],
+            timeSpent: 0,
+            currentStreak: 0,
+            lastActivity: null,
+            ratings: {}
+        };
+
+        let currentCategory = 'all';
+        let filteredPractices = [];
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            filteredPractices = [...practicesData];
+            renderPractices();
+            renderRecommendations();
+            updateProgressStats();
+            checkStreak();
+        });
+
+        // Рендер практик
+        function renderPractices() {
+            const grid = document.getElementById('practicesGrid');
+            grid.innerHTML = '';
+
+            if (filteredPractices.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-practices card text-center">
+                        <h3>🔍 Практики не найдены</h3>
+                        <p>Попробуйте изменить параметры поиска или фильтрации</p>
+                        <button class="btn" onclick="resetFilters()">Сбросить фильтры</button>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredPractices.forEach(practice => {
+                const isCompleted = userProgress.completed.includes(practice.id);
+                const userRating = userProgress.ratings[practice.id] || 0;
+                
+                const practiceCard = `
+                    <article class="practice-card ${isCompleted ? 'completed' : ''}" data-id="${practice.id}">
+                        ${practice.featured ? '<div class="featured-badge">⭐ Рекомендуемая</div>' : ''}
+                        ${isCompleted ? '<div class="completion-badge">✅ Пройдена</div>' : ''}
+                        
+                        <div class="practice-image">
+                            <img src="${practice.image}" alt="${practice.title}" onerror="this.src='../images/default-practice.jpg'">
+                            <div class="practice-category ${practice.category}">${getCategoryName(practice.category)}</div>
+                        </div>
+                        
+                        <div class="practice-content">
+                            <h3 class="practice-title">${practice.title}</h3>
+                            <p class="practice-description">${practice.description}</p>
+                            
+                            <div class="practice-meta">
+                                <span class="difficulty ${practice.difficulty}">
+                                    ${getDifficultyIcon(practice.difficulty)} ${getDifficultyText(practice.difficulty)}
+                                </span>
+                                <span class="duration">⏱️ ${formatDuration(practice.duration)}</span>
+                                <span class="rating">⭐ ${practice.rating}</span>
+                            </div>
+                            
+                            <div class="practice-stats">
+                                <span class="stat">👥 ${practice.students} студентов</span>
+                                <span class="stat">🎯 ${Math.round((practice.completed / practice.students) * 100)}% завершили</span>
+                            </div>
+                            
+                            <div class="practice-tags">
+                                ${practice.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                            
+                            <div class="practice-actions">
+                                <button class="btn ${isCompleted ? 'btn-outline' : 'btn-primary'}" 
+                                        onclick="startPractice(${practice.id})">
+                                    ${isCompleted ? 'Повторить' : 'Начать практику'}
+                                </button>
+                                <button class="btn-icon" onclick="toggleBookmark(${practice.id})" title="Добавить в закладки">
+                                    🔖
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+                grid.innerHTML += practiceCard;
+            });
+        }
+
+        // Фильтрация и поиск
+        function filterPractices(category = null) {
+            if (category) {
+                currentCategory = category;
+                // Обновляем активные кнопки категорий
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.category === category);
+                });
+            }
+
+            const difficulty = document.getElementById('difficultyFilter').value;
+            const duration = document.getElementById('durationFilter').value;
+            const searchTerm = document.getElementById('practiceSearch').value.toLowerCase();
+
+            filteredPractices = practicesData.filter(practice => {
+                const matchesCategory = currentCategory === 'all' || practice.category === currentCategory;
+                const matchesDifficulty = difficulty === 'all' || practice.difficulty === difficulty;
+                const matchesSearch = practice.title.toLowerCase().includes(searchTerm) || 
+                                    practice.description.toLowerCase().includes(searchTerm) ||
+                                    practice.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                const matchesDuration = filterByDuration(practice.duration, duration);
+                
+                return matchesCategory && matchesDifficulty && matchesSearch && matchesDuration;
+            });
+
+            renderPractices();
+        }
+
+        function searchPractices() {
+            filterPractices();
+        }
+
+        function filterByDuration(duration, filterType) {
+            switch(filterType) {
+                case 'short': return duration < 60;
+                case 'medium': return duration >= 60 && duration <= 180;
+                case 'long': return duration > 180;
+                default: return true;
+            }
+        }
+
+        function sortPractices() {
+            const sortBy = document.getElementById('sortPractices').value;
+            
+            filteredPractices.sort((a, b) => {
+                switch(sortBy) {
+                    case 'difficulty': 
+                        const difficultyOrder = {beginner: 1, intermediate: 2, advanced: 3};
+                        return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+                    case 'duration': return a.duration - b.duration;
+                    case 'rating': return b.rating - a.rating;
+                    case 'newest': return b.id - a.id;
+                    default: return b.students - a.students; // popular
+                }
+            });
+            
+            renderPractices();
+        }
+
+        function resetFilters() {
+            currentCategory = 'all';
+            document.getElementById('difficultyFilter').value = 'all';
+            document.getElementById('durationFilter').value = 'all';
+            document.getElementById('practiceSearch').value = '';
+            document.getElementById('sortPractices').value = 'popular';
+            
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === 'all');
+            });
+            
+            filterPractices();
+        }
+
+        // Действия с практиками
+        function startPractice(practiceId) {
+            const practice = practicesData.find(p => p.id === practiceId);
+            const modalBody = document.getElementById('modalBody');
+            const isCompleted = userProgress.completed.includes(practiceId);
+            
+            modalBody.innerHTML = `
+                <div class="practice-detail">
+                    <div class="practice-header">
+                        <div class="practice-meta">
+                            <span class="practice-category ${practice.category}">${getCategoryName(practice.category)}</span>
+                            <span class="difficulty ${practice.difficulty}">
+                                ${getDifficultyIcon(practice.difficulty)} ${getDifficultyText(practice.difficulty)}
+                            </span>
+                            <span class="duration">⏱️ ${formatDuration(practice.duration)}</span>
+                        </div>
+                        <h1>${practice.title}</h1>
+                        <div class="practice-stats">
+                            <span class="stat">⭐ ${practice.rating} (${practice.students} студентов)</span>
+                            <span class="stat">🎯 ${Math.round((practice.completed / practice.students) * 100)}% завершили</span>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-description-full">
+                        <p>${practice.description}</p>
+                    </div>
+                    
+                    <div class="practice-content-sections">
+                        <div class="section">
+                            <h3>📋 Что вы освоите</h3>
+                            <ul class="skills-list">
+                                ${practice.steps.map(step => `<li>${step}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>📁 Материалы для практики</h3>
+                            <div class="materials-list">
+                                ${practice.materials.map(material => `
+                                    <div class="material-item">
+                                        <span class="material-icon">📄</span>
+                                        <span>${material}</span>
+                                        <button class="btn-download" onclick="downloadMaterial('${material}')">⬇️</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="section">
+                            <h3>🎯 Требования</h3>
+                            <div class="requirements-list">
+                                ${practice.requirements.map(req => `<span class="requirement">${req}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-tags-full">
+                        ${practice.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    
+                    <div class="practice-actions-full">
+                        <button class="btn btn-large btn-primary" onclick="completePractice(${practice.id})">
+                            ${isCompleted ? '✅ Практика завершена' : '🎯 Начать выполнение'}
+                        </button>
+                        <div class="action-buttons">
+                            <button class="btn-icon" onclick="toggleBookmark(${practice.id})" title="Закладки">
+                                🔖
+                            </button>
+                            <button class="btn-icon" onclick="sharePractice(${practice.id})" title="Поделиться">
+                                📤
+                            </button>
+                            <div class="rating-widget">
+                                <span>Оцените практику:</span>
+                                <div class="stars" id="stars-${practice.id}">
+                                    ${[1,2,3,4,5].map(star => `
+                                        <span class="star ${star <= (userProgress.ratings[practice.id] || 0) ? 'active' : ''}" 
+                                              onclick="ratePractice(${practice.id}, ${star})">⭐</span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('practiceModal').style.display = 'block';
+        }
+
+        function completePractice(practiceId) {
+            if (!userProgress.completed.includes(practiceId)) {
+                userProgress.completed.push(practiceId);
+                userProgress.timeSpent += practicesData.find(p => p.id === practiceId).duration;
+                userProgress.lastActivity = new Date().toISOString();
+                
+                localStorage.setItem('userProgress', JSON.stringify(userProgress));
+                updateProgressStats();
+                checkStreak();
+                showNotification('🎉 Поздравляем! Вы завершили практику!');
+            }
+            
+            closeModal();
+            renderPractices();
+        }
+
+        function ratePractice(practiceId, rating) {
+            userProgress.ratings[practiceId] = rating;
+            localStorage.setItem('userProgress', JSON.stringify(userProgress));
+            
+            // Обновляем отображение звезд
+            const starsContainer = document.getElementById(`stars-${practiceId}`);
+            starsContainer.querySelectorAll('.star').forEach((star, index) => {
+                star.classList.toggle('active', index < rating);
+            });
+            
+            showNotification('⭐ Спасибо за вашу оценку!');
+            updateProgressStats();
+        }
+
+        function toggleBookmark(practiceId) {
+            let bookmarks = JSON.parse(localStorage.getItem('practiceBookmarks')) || [];
+            const index = bookmarks.indexOf(practiceId);
+            
+            if (index === -1) {
+                bookmarks.push(practiceId);
+                showNotification('🔖 Практика добавлена в закладки');
+            } else {
+                bookmarks.splice(index, 1);
+                showNotification('🔖 Практика удалена из закладок');
+            }
+            
+            localStorage.setItem('practiceBookmarks', JSON.stringify(bookmarks));
+        }
+
+        function sharePractice(practiceId) {
+            const practice = practicesData.find(p => p.id === practiceId);
+            const shareText = `Посмотрите эту практику: ${practice.title}`;
+            const shareUrl = window.location.href;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: practice.title,
+                    text: shareText,
+                    url: shareUrl
+                });
+            } else {
+                navigator.clipboard.writeText(`${shareText} - ${shareUrl}`);
+                showNotification('🔗 Ссылка скопирована в буфер обмена!');
+            }
+        }
+
+        function downloadMaterial(materialName) {
+            showNotification(`📥 Загрузка материала: ${materialName}`);
+            // В реальном приложении здесь был бы запрос к серверу
+        }
+
+        // Рекомендации
+        function renderRecommendations() {
+            const recommendations = document.getElementById('recommendationsGrid');
+            const recommended = practicesData
+                .filter(p => p.featured)
+                .slice(0, 3);
+            
+            recommendations.innerHTML = recommended.map(practice => `
+                <div class="recommendation-card" onclick="startPractice(${practice.id})">
+                    <div class="rec-image">
+                        <img src="${practice.image}" alt="${practice.title}" onerror="this.src='../images/default-practice.jpg'">
+                    </div>
+                    <div class="rec-content">
+                        <h4>${practice.title}</h4>
+                        <p>${practice.description.substring(0, 80)}...</p>
+                        <div class="rec-meta">
+                            <span class="difficulty ${practice.difficulty}">${getDifficultyText(practice.difficulty)}</span>
+                            <span class="duration">${formatDuration(practice.duration)}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Прогресс и статистика
+        function updateProgressStats() {
+            const completed = userProgress.completed.length;
+            const total = practicesData.length;
+            const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            // Общее время обучения
+            const hours = Math.floor(userProgress.timeSpent / 60);
+            const minutes = userProgress.timeSpent % 60;
+            
+            // Средний рейтинг
+            const ratings = Object.values(userProgress.ratings);
+            const averageRating = ratings.length > 0 ? 
+                (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : '0.0';
+            
+            document.getElementById('completedPractices').textContent = completed;
+            document.getElementById('totalPractices').textContent = total;
+            document.getElementById('successRate').textContent = completionRate + '%';
+            document.getElementById('totalTime').textContent = `${hours}ч ${minutes}м`;
+            document.getElementById('currentStreak').textContent = userProgress.currentStreak;
+            document.getElementById('averageRating').textContent = averageRating;
+            document.getElementById('completionRate').textContent = completionRate + '%';
+        }
+
+        function checkStreak() {
+            if (!userProgress.lastActivity) return;
+            
+            const lastActivity = new Date(userProgress.lastActivity);
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            if (lastActivity.toDateString() === today.toDateString()) {
+                // Активность сегодня уже учтена
+            } else if (lastActivity.toDateString() === yesterday.toDateString()) {
+                userProgress.currentStreak++;
+                userProgress.lastActivity = today.toISOString();
+                localStorage.setItem('userProgress', JSON.stringify(userProgress));
+            } else {
+                userProgress.currentStreak = 1;
+                userProgress.lastActivity = today.toISOString();
+                localStorage.setItem('userProgress', JSON.stringify(userProgress));
+            }
+        }
+
+        function showProgress() {
+            document.getElementById('progressModal').style.display = 'block';
+            renderProgressCharts();
+        }
+
+        function renderProgressCharts() {
+            // Простой пример визуализации прогресса
+            const categoryProgress = document.getElementById('categoryProgress');
+            const categories = ['web', 'design', 'programming', 'data', 'mobile'];
+            
+            categoryProgress.innerHTML = categories.map(category => {
+                const categoryPractices = practicesData.filter(p => p.category === category);
+                const completedInCategory = userProgress.completed.filter(id => 
+                    practicesData.find(p => p.id === id)?.category === category
+                ).length;
+                const progress = categoryPractices.length > 0 ? 
+                    Math.round((completedInCategory / categoryPractices.length) * 100) : 0;
+                
+                return `
+                    <div class="category-progress-item">
+                        <span class="category-name">${getCategoryName(category)}</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progress}%"></div>
+                        </div>
+                        <span class="progress-percent">${progress}%</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Вспомогательные функции
+        function getCategoryName(category) {
+            const categories = {
+                'web': 'Веб-разработка',
+                'design': 'Дизайн',
+                'programming': 'Программирование',
+                'data': 'Анализ данных',
+                'mobile': 'Мобильная разработка'
+            };
+            return categories[category] || category;
+        }
+
+        function getDifficultyText(difficulty) {
+            const difficulties = {
+                'beginner': 'Начальный',
+                'intermediate': 'Средний',
+                'advanced': 'Продвинутый'
+            };
+            return difficulties[difficulty] || difficulty;
+        }
+
+        function getDifficultyIcon(difficulty) {
+            const icons = {
+                'beginner': '🟢',
+                'intermediate': '🟡',
+                'advanced': '🔴'
+            };
+            return icons[difficulty] || '⚪';
+        }
+
+        function formatDuration(minutes) {
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            return hours > 0 ? `${hours}ч ${mins}м` : `${mins}м`;
+        }
+
+        function closeModal() {
+            document.getElementById('practiceModal').style.display = 'none';
+        }
+
+        function closeProgressModal() {
+            document.getElementById('progressModal').style.display = 'none';
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Закрытие модальных окон
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+    <style>
+        .header-actions {
+            position: absolute;
+            right: 30px;
+            top: 30px;
+        }
+
+        .btn-progress {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-progress:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .practices-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .progress-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .progress-item {
+            text-align: center;
+        }
+
+        .progress-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+       
