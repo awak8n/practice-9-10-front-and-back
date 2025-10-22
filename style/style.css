@@ -331,16 +331,24 @@ main.content {
 }
 
 /* ===== МОДАЛЬНОЕ ОКНО ===== */
-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.6);
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
 }
 
-dialog {
-    border: none;
-    border-radius: 12px;
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
     padding: 0;
+    border-radius: 12px;
+    width: 90%;
     max-width: 500px;
-    width: 90vw;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
@@ -349,6 +357,9 @@ dialog {
     color: white;
     padding: 1.5rem;
     border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .modal-header h2 {
@@ -357,7 +368,18 @@ dialog {
     font-size: 1.5rem;
 }
 
-.modal-content {
+.close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ccc;
+}
+
+.modal-body {
     padding: 2rem;
 }
 
@@ -413,6 +435,16 @@ dialog {
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
+.btn-cancel {
+    background: #f8f9fa;
+    color: #2c3e50;
+    border: 2px solid #e9ecef;
+}
+
+.btn-cancel:hover {
+    background: #e9ecef;
+}
+
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 768px) {
     .nav-list {
@@ -438,9 +470,9 @@ dialog {
     }
 
     /* Адаптивность модального окна */
-    dialog {
-        margin: 1rem;
-        width: calc(100vw - 2rem);
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
     }
     
     .modal-actions {
@@ -473,5 +505,9 @@ dialog {
     .skill-tag {
         min-height: 50px;
         font-size: 13px;
+    }
+    
+    .modal-body {
+        padding: 1rem;
     }
 }
