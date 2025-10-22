@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <title>Главная - Магазин фруктов</title>
+    <link rel="stylesheet" href="style/style.css">
     <style>
         /* Стили модального окна */
         dialog::backdrop {
             background: rgba(0, 0, 0, 0.6);
-            animation: fadeIn 0.3s ease;
         }
         
         dialog {
@@ -19,7 +18,6 @@
             max-width: 500px;
             width: 90vw;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            animation: slideIn 0.3s ease;
         }
         
         .modal-header {
@@ -57,15 +55,7 @@
             border: 2px solid #e9ecef;
             border-radius: 6px;
             font-size: 1rem;
-            transition: border-color 0.3s ease;
             box-sizing: border-box;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
         }
         
         .form-group textarea {
@@ -80,97 +70,44 @@
             margin-top: 2rem;
         }
         
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
         .btn-secondary {
             background: #f8f9fa;
             color: #2c3e50;
             border: 2px solid #e9ecef;
-        }
-        
-        .btn-secondary:hover {
-            background: #e9ecef;
-        }
-        
-        /* Анимации */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        /* Адаптивность */
-        @media (max-width: 600px) {
-            .modal-actions {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
         }
     </style>
 </head>
 <body>
     <div class="page-container">
         <header class="header">
-            <h1>Контакты</h1>
+            <h1>Магазин фруктов</h1>
         </header>
         
         <nav class="nav">
             <ul class="nav-list">
-                <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
-                <li class="nav-item"><a class="nav-link" href="news.html">Новости</a></li>
-                <li class="nav-item"><a class="nav-link" href="practices.html">Практики</a></li>
-                <li class="nav-item"><a class="nav-link" href="goods.html">Товары</a></li>
-                <li class="nav-item"><a class="nav-link active" href="contacts.html">Контакты</a></li>
+                <li class="nav-item"><a class="nav-link active" href="index.html">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/news.html">Новости</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/practices.html">Практики</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/goods.html">Товары</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/contacts.html">Контакты</a></li>
             </ul>
         </nav>
         
         <main class="content">
-            <h1 class="page-title">Контакты</h1>
+            <h1 class="page-title">Добро пожаловать в наш магазин!</h1>
             
-            <div class="contact-info card">
-                <p><strong>Email:</strong> desscometomm@mail.ru</p>
-                <p><strong>Адрес:</strong> г. Москва, ул. Пушкина, д. 1</p>
-                <!-- Кнопка открытия модального окна -->
-                <button class="btn mt-20" id="openModalBtn">Связаться со мной</button>
+            <div class="card">
+                <h2>Свежие фрукты каждый день</h2>
+                <p>Мы предлагаем широкий ассортимент свежих фруктов по доступным ценам. Качество и свежесть гарантированы!</p>
+                <button class="btn mt-20" onclick="contactModal.showModal()">Связаться с нами</button>
             </div>
         </main>
         
         <footer class="footer">
-            <p>Футер</p>
+            <p>&copy; 2024 Магазин фруктов. Все права защищены.</p>
         </footer>
 
-        <!-- Модальное окно с использованием dialog -->
+        <!-- Модальное окно -->
         <dialog id="contactModal">
             <div class="modal-header">
                 <h2>Форма обратной связи</h2>
@@ -190,22 +127,12 @@
                         <input type="email" id="email" name="email" required placeholder="example@mail.ru">
                     </div>
                     <div class="form-group">
-                        <label for="category">Категория обращения *</label>
-                        <select id="category" name="category" required>
-                            <option value="">Выберите категорию</option>
-                            <option value="support">Поддержка</option>
-                            <option value="cooperation">Сотрудничество</option>
-                            <option value="question">Вопрос</option>
-                            <option value="other">Другое</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Текст обращения *</label>
-                        <textarea id="message" name="message" required placeholder="Опишите вашу проблему или вопрос..."></textarea>
+                        <label for="message">Сообщение *</label>
+                        <textarea id="message" name="message" required placeholder="Ваше сообщение..."></textarea>
                     </div>
                     <div class="modal-actions">
-                        <button type="button" class="btn btn-secondary" id="cancelBtn">Отмена</button>
-                        <button type="submit" class="btn btn-primary">Отправить</button>
+                        <button type="button" class="btn btn-secondary" onclick="contactModal.close()">Отмена</button>
+                        <button type="submit" class="btn">Отправить</button>
                     </div>
                 </form>
             </div>
@@ -213,67 +140,14 @@
     </div>
 
     <script>
-        // Получаем элементы
         const modal = document.getElementById('contactModal');
-        const openBtn = document.getElementById('openModalBtn');
-        const cancelBtn = document.getElementById('cancelBtn');
         const form = document.getElementById('feedbackForm');
 
-        // Открытие модального окна
-        openBtn.addEventListener('click', () => {
-            modal.showModal(); // Правильный метод для открытия dialog
-        });
-
-        // Закрытие модального окна при клике на "Отмена"
-        cancelBtn.addEventListener('click', () => {
-            modal.close(); // Правильный метод для закрытия dialog
-        });
-
-        // Закрытие модального окна при клике на фон (backdrop)
-        modal.addEventListener('click', (event) => {
-            const dialogDimensions = modal.getBoundingClientRect();
-            if (
-                event.clientX < dialogDimensions.left ||
-                event.clientX > dialogDimensions.right ||
-                event.clientY < dialogDimensions.top ||
-                event.clientY > dialogDimensions.bottom
-            ) {
-                modal.close();
-            }
-        });
-
-        // Обработка отправки формы
         form.addEventListener('submit', (event) => {
             event.preventDefault();
-            
-            // Собираем данные формы
-            const formData = new FormData(form);
-            const data = {
-                name: formData.get('name'),
-                phone: formData.get('phone'),
-                email: formData.get('email'),
-                category: formData.get('category'),
-                message: formData.get('message')
-            };
-            
-            // В реальном приложении здесь был бы AJAX-запрос
-            console.log('Данные формы:', data);
-            
-            // Показываем уведомление об успешной отправке
-            alert('Спасибо! Ваше обращение отправлено. Мы свяжемся с вами в ближайшее время.');
-            
-            // Закрываем модальное окно
+            alert('Спасибо! Ваше сообщение отправлено.');
             modal.close();
-            
-            // Очищаем форму
             form.reset();
-        });
-
-        // Предотвращаем отправку формы по Enter в текстовых полях
-        form.addEventListener('keypress', (event) => {
-            if (event.key === 'Enter' && event.target.type !== 'textarea') {
-                event.preventDefault();
-            }
         });
     </script>
 </body>
