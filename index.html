@@ -3,69 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Семестровая работа</title>
-    <link rel="stylesheet" href="style/style.css">
+    <title>Контакты</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <style>
+        /* Стили модального окна */
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.6);
+        }
+        dialog {
+            border: none;
+            border-radius: 12px;
+            padding: 0;
+            max-width: 500px;
+            width: 90vw;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px 12px 0 0;
+        }
+        .modal-content {
+            padding: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+    </style>
 </head>
 <body>
     <div class="page-container">
-        <header class="header">Хэдер</header>
+        <header class="header">
+            <h1>Контакты</h1>
+        </header>
         
         <nav class="nav">
             <ul class="nav-list">
-                <li class="nav-item"><a class="nav-link active" href="index.html">Главная</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/news.html">Новости</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/practices.html">Практики</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/goods.html">Товары</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/contacts.html">Контакты</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="news.html">Новости</a></li>
+                <li class="nav-item"><a class="nav-link" href="practices.html">Практики</a></li>
+                <li class="nav-item"><a class="nav-link" href="goods.html">Товары</a></li>
+                <li class="nav-item"><a class="nav-link active" href="contacts.html">Контакты</a></li>
             </ul>
         </nav>
         
         <main class="content">
-            <article class="profile-header card text-center">
-                <h1 class="profile-title page-title">Информация об авторе</h1>
-                <img class="profile-photo" src="images/photo.png" alt="Фото автора">
-                <h2 class="profile-name">Левашев Егор Вячеславович</h2>
-                <p class="profile-group">ЭФБО-13-24</p>
-            </article>
+            <h1 class="page-title">Контакты</h1>
             
-            <section class="about-me card">
-                <h2 class="section-title">Обо мне</h2>
-                <p>CR 7 MENTALLITY</p>
-                <p>Обо мне: Я родился в Москве</p>
-            </section>
-            
-            <section class="skills-container card">
-                <h2 class="section-title">Мои навыки</h2>
-                <div class="skills-grid">
-                    <div class="skill-tag">Rocket Leagua<br>Champion 1</div>
-                    <div class="skill-tag">CS2<br>2000elo 10lvl faceit+</div>
-                    <div class="skill-tag">Clash Royale<br>9970 mmr</div>
-                    <div class="skill-tag">Deadlock<br>ARC 6+</div>
-                </div>
-            </section>
-            
-            <section class="experience-section">
-                <h2 class="section-title">Мой опыт работы</h2>
-                <div class="experience-grid">
-                    <article class="experience-card card">
-                        <h3 class="experience-title">Продавец</h3>
-                        <p class="experience-desc">Продавал апельсины на базаре</p>
-                    </article>
-                    
-                    <article class="experience-card card">
-                        <h3 class="experience-title">Стример</h3>
-                        <p class="experience-desc">Стримил на твиче разное</p>
-                    </article>
-                    
-                    <article class="experience-card card">
-                        <h3 class="experience-title">Ген. директор</h3>
-                        <p class="experience-desc">Был ген. директором</p>
-                    </article>
-                </div>
-            </section>
+            <div class="contact-info card">
+                <p><strong>Email:</strong> desscometomm@mail.ru</p>
+                <p><strong>Адрес:</strong> г. Москва, ул. Пушкина, д. 1</p>
+                <button class="btn mt-20" onclick="contactModal.showModal()">Связаться со мной</button>
+            </div>
         </main>
         
-        <footer class="footer">Футер</footer>
+        <footer class="footer">
+            <p>Футер</p>
+        </footer>
+
+        <!-- Модальное окно -->
+        <dialog id="contactModal">
+            <div class="modal-header">
+                <h2>Обратная связь</h2>
+            </div>
+            <div class="modal-content">
+                <form id="feedbackForm" method="dialog">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" name="name" required placeholder="Ваше имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="example@mail.ru">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Тема обращения</label>
+                        <select id="category" name="category" required>
+                            <option value="">Выберите тему</option>
+                            <option value="cooperation">Сотрудничество</option>
+                            <option value="question">Вопрос</option>
+                            <option value="project">Проект</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message" required placeholder="Ваше сообщение..."></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn" onclick="contactModal.close()">Отмена</button>
+                        <button type="button" class="btn btn-primary" onclick="submitForm()">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
     </div>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById('feedbackForm');
+            
+            // Проверяем валидность формы
+            if (!form.checkValidity()) {
+                alert('Пожалуйста, заполните все обязательные поля');
+                return;
+            }
+
+            // Собираем данные
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // В реальном проекте здесь был бы fetch-запрос
+            console.log('Данные формы:', data);
+            
+            // Уведомление и закрытие
+            alert('Сообщение отправлено! Спасибо за обращение.');
+            contactModal.close();
+            form.reset();
+        }
+
+        // Закрытие по клику на фон
+        contactModal.addEventListener('click', (event) => {
+            if (event.target === contactModal) {
+                contactModal.close();
+            }
+        });
+    </script>
 </body>
 </html>

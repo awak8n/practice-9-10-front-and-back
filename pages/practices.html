@@ -8,7 +8,10 @@
 </head>
 <body>
     <div class="page-container">
-        <header class="header">Хэдер</header>
+        <header class="header">
+            <h1>Учебные практики</h1>
+        </header>
+        
         <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
@@ -18,15 +21,69 @@
                 <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
             </ul>
         </nav>
+        
         <main class="content">
-            <h1 class="page-title">Практики</h1>
-            <div class="card text-center">
+            <h1 class="page-title">Практические материалы</h1>
+            
+            <div class="development-notice card notice-card">
+                <div class="notice-icon">🚧</div>
                 <h2 class="section-title">Раздел в разработке</h2>
-                <p>Раздел практик находится в разработке.</p>
-                <p>Скоро здесь появятся материалы для практических занятий.</p>
+                <p>Мы активно работаем над наполнением этого раздела практическими материалами.</p>
+                <p>Скоро здесь появятся:</p>
+                <ul class="features-list">
+                    <li>📚 Учебные пособия</li>
+                    <li>💻 Практические задания</li>
+                    <li>🎯 Тесты и упражнения</li>
+                    <li>📊 Примеры проектов</li>
+                </ul>
+                <div class="progress-section">
+                    <p><strong>Прогресс разработки:</strong></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%"></div>
+                    </div>
+                    <span class="progress-text">45% завершено</span>
+                </div>
             </div>
+
+            <section class="upcoming-practices card">
+                <h2 class="section-title">Предстоящие практики</h2>
+                <div class="practices-grid">
+                    <div class="practice-item">
+                        <h3>Веб-разработка</h3>
+                        <p>HTML, CSS, JavaScript</p>
+                        <span class="status upcoming">⏳ Скоро</span>
+                    </div>
+                    <div class="practice-item">
+                        <h3>Базы данных</h3>
+                        <p>SQL, проектирование</p>
+                        <span class="status upcoming">⏳ Скоро</span>
+                    </div>
+                    <div class="practice-item">
+                        <h3>Фронтенд</h3>
+                        <p>React, Vue.js</p>
+                        <span class="status upcoming">⏳ Скоро</span>
+                    </div>
+                    <div class="practice-item">
+                        <h3>Бэкенд</h3>
+                        <p>Node.js, Python</p>
+                        <span class="status upcoming">⏳ Скоро</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="subscribe-card card">
+                <h2 class="section-title">Узнайте первым о новых материалах</h2>
+                <p>Подпишитесь на уведомления о выходе новых практических материалов</p>
+                <div class="subscribe-form">
+                    <input type="email" placeholder="Ваш email" class="form-input">
+                    <button class="btn btn-primary">Подписаться</button>
+                </div>
+            </section>
         </main>
-        <footer class="footer">Футер</footer>
+        
+        <footer class="footer">
+            <p>&copy; 2024 Учебные практики. ЭФБО-13-24</p>
+        </footer>
     </div>
 </body>
 </html>

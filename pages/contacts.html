@@ -8,7 +8,10 @@
 </head>
 <body>
     <div class="page-container">
-        <header class="header">Хэдер</header>
+        <header class="header">
+            <h1>Контакты</h1>
+        </header>
+        
         <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
@@ -18,16 +21,57 @@
                 <li class="nav-item"><a class="nav-link active" href="contacts.html">Контакты</a></li>
             </ul>
         </nav>
+        
         <main class="content">
-            <h1 class="page-title">Контакты</h1>
+            <h1 class="page-title">Свяжитесь со мной</h1>
             
-            <div class="contact-info card">
-                <p><strong>Email:</strong> desscometomm@mail.ru</p>
-                <p><strong>Адрес:</strong> г. Москва, ул. Пушкина, д. 1</p>
-                <button class="btn mt-20" onclick="alert('Функция звонка')">Позвонить</button>
+            <div class="contact-grid">
+                <section class="contact-info card contact-card">
+                    <h2 class="section-title">Контактная информация</h2>
+                    <div class="contact-item">
+                        <strong>📧 Email:</strong>
+                        <a href="mailto:desscometomm@mail.ru">desscometomm@mail.ru</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>📍 Адрес:</strong>
+                        <span>г. Москва, ул. Пушкина, д. 1</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>📱 Телефон:</strong>
+                        <span>+7 (999) 123-45-67</span>
+                    </div>
+                </section>
+
+                <section class="contact-actions card">
+                    <h2 class="section-title">Быстрые действия</h2>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="alert('Функция звонка')">
+                            📞 Позвонить
+                        </button>
+                        <button class="btn btn-secondary" onclick="alert('Функция письма')">
+                            ✉️ Написать письмо
+                        </button>
+                        <button class="btn btn-outline" onclick="alert('Функция карты')">
+                            🗺️ Посмотреть на карте
+                        </button>
+                    </div>
+                </section>
+
+                <section class="social-links card">
+                    <h2 class="section-title">Социальные сети</h2>
+                    <div class="social-grid">
+                        <a href="#" class="social-link twitter">Twitter</a>
+                        <a href="#" class="social-link vk">VK</a>
+                        <a href="#" class="social-link telegram">Telegram</a>
+                        <a href="#" class="social-link github">GitHub</a>
+                    </div>
+                </section>
             </div>
         </main>
-        <footer class="footer">Футер</footer>
+        
+        <footer class="footer">
+            <p>&copy; 2024 Левашев Егор Вячеславович. Все права защищены.</p>
+        </footer>
     </div>
 </body>
 </html>

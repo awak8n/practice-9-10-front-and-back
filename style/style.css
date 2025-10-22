@@ -1,12 +1,12 @@
 /* ===== БАЗОВЫЕ СТИЛИ ===== */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     color: #2c3e50;
@@ -53,15 +53,10 @@ body {
 
 .nav-list {
     list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     gap: 25px;
-}
-
-.nav-item {
-    margin: 0;
+    flex-wrap: wrap;
 }
 
 .nav-link {
@@ -71,12 +66,14 @@ body {
     border-radius: 25px;
     transition: all 0.3s ease;
     font-weight: 500;
+    display: block;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.15);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
@@ -89,7 +86,7 @@ main.content {
 
 /* ===== ОБЩИЕ КОМПОНЕНТЫ ===== */
 .page-title {
-    font-size: 32px;
+    font-size: clamp(28px, 4vw, 32px);
     color: #2c3e50;
     text-align: center;
     margin-bottom: 40px;
@@ -97,7 +94,7 @@ main.content {
 }
 
 .section-title {
-    font-size: 28px;
+    font-size: clamp(24px, 3vw, 28px);
     color: #2c3e50;
     margin: 40px 0 20px 0;
     font-weight: 300;
@@ -107,16 +104,17 @@ main.content {
 
 .card {
     background: white;
-    padding: 25px;
+    padding: clamp(20px, 3vw, 25px);
     margin: 20px 0;
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     border-left: 4px solid #667eea;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .card:hover {
-    transform: translateX(5px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
 }
 
 .btn {
@@ -155,35 +153,40 @@ main.content {
     text-align: center;
     margin-bottom: 40px;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 40px 25px;
+    padding: clamp(30px, 4vw, 40px) 25px;
 }
 
 .profile-title {
-    font-size: 32px;
+    font-size: clamp(28px, 4vw, 32px);
     color: #2c3e50;
     margin-bottom: 20px;
     font-weight: 300;
 }
 
 .profile-photo {
-    width: 220px;
-    height: 280px;
+    width: clamp(150px, 30vw, 220px);
+    height: clamp(180px, 35vw, 280px);
     border-radius: 15px;
     object-fit: cover;
     margin: 20px auto;
     border: 4px solid #667eea;
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.02);
 }
 
 .profile-name {
-    font-size: 24px;
+    font-size: clamp(20px, 3vw, 24px);
     color: #2c3e50;
     margin: 20px 0 10px 0;
     font-weight: 500;
 }
 
 .profile-group {
-    font-size: 18px;
+    font-size: clamp(16px, 2vw, 18px);
     color: #7f8c8d;
     margin: 5px 0;
 }
@@ -212,13 +215,17 @@ main.content {
 .skill-tag {
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
-    padding: 12px 25px;
+    padding: 12px 20px;
     border-radius: 25px;
     font-weight: 600;
     font-size: 14px;
     box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
     transition: all 0.3s ease;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
 }
 
 .skill-tag:hover {
@@ -233,24 +240,20 @@ main.content {
 
 .experience-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 20px;
 }
 
 .experience-card.card {
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    border-left: 4px solid #667eea;
-    transition: transform 0.3s ease;
-}
-
-.experience-card.card:hover {
-    transform: translateX(5px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .experience-title {
-    font-size: 20px;
+    font-size: clamp(18px, 2.5vw, 20px);
     color: #2c3e50;
     margin: 0 0 10px 0;
     font-weight: 600;
@@ -260,62 +263,42 @@ main.content {
     color: #7f8c8d;
     line-height: 1.6;
     margin: 0;
-}
-
-/* ===== НОВОСТИ ===== */
-.news-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.news-item.card {
-    border-left: 4px solid #4facfe;
-}
-
-.news-title {
-    color: #2c3e50;
-    margin-bottom: 10px;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.news-meta {
-    color: #7f8c8d;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.news-text {
-    color: #34495e;
-    line-height: 1.6;
+    flex-grow: 1;
 }
 
 /* ===== ТОВАРЫ ===== */
 .grid-2 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
     gap: 25px;
 }
 
 .goods-item.card {
     text-align: center;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .goods-image {
-    width: 150px;
-    height: 150px;
+    width: clamp(120px, 20vw, 150px);
+    height: clamp(120px, 20vw, 150px);
     object-fit: cover;
     border-radius: 10px;
     margin: 0 auto 15px;
     border: 3px solid #667eea;
+    transition: transform 0.3s ease;
+}
+
+.goods-image:hover {
+    transform: scale(1.05);
 }
 
 .goods-title {
     color: #2c3e50;
     margin: 15px 0 10px;
-    font-size: 18px;
+    font-size: clamp(16px, 2vw, 18px);
     font-weight: 600;
 }
 
@@ -323,13 +306,13 @@ main.content {
     color: #e74c3c;
     font-weight: bold;
     margin-bottom: 15px;
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
 }
 
 /* ===== КОНТАКТЫ ===== */
 .contact-info.card {
     text-align: center;
-    font-size: 18px;
+    font-size: clamp(16px, 2vw, 18px);
     padding: 30px;
 }
 
@@ -347,11 +330,95 @@ main.content {
     grid-area: footer;
 }
 
+/* ===== МОДАЛЬНОЕ ОКНО ===== */
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+dialog {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    max-width: 500px;
+    width: 90vw;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.modal-content {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 768px) {
     .nav-list {
         flex-direction: column;
         gap: 10px;
+        padding: 0 20px;
     }
     
     main.content {
@@ -359,48 +426,52 @@ main.content {
     }
     
     .skills-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
     
-    .experience-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .grid-2 {
-        grid-template-columns: 1fr;
-    }
-    
-    .profile-photo {
-        width: 180px;
-        height: 220px;
+    .card {
+        margin: 15px 0;
     }
     
     .header {
         padding: 20px;
-        font-size: 24px;
+    }
+
+    /* Адаптивность модального окна */
+    dialog {
+        margin: 1rem;
+        width: calc(100vw - 2rem);
     }
     
-    .page-title {
-        font-size: 28px;
+    .modal-actions {
+        flex-direction: column;
     }
     
-    .section-title {
-        font-size: 24px;
+    .modal-actions .btn {
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
+    .nav-link {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
     .card {
-        padding: 20px;
+        padding: 15px;
     }
     
-    .goods-image {
-        width: 120px;
-        height: 120px;
+    .profile-header.card {
+        padding: 20px 15px;
     }
     
-    .profile-photo {
-        width: 150px;
-        height: 180px;
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .skill-tag {
+        min-height: 50px;
+        font-size: 13px;
     }
 }

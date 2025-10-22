@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,10 @@
 </head>
 <body>
     <div class="page-container">
-        <header class="header">Хэдер</header>
+        <header class="header">
+            <h1>Магазин фруктов</h1>
+        </header>
+        
         <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
@@ -18,40 +21,94 @@
                 <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
             </ul>
         </nav>
+        
         <main class="content">
-            <h1 class="page-title">Товары</h1>
+            <h1 class="page-title">Наши товары</h1>
             
-            <div class="grid grid-2">
-                <div class="goods-item card text-center">
-                    <img src="../images/goods1.jpg" alt="Товар 1" class="goods-image">
-                    <h3 class="goods-title">Арбуз</h3>
-                    <p class="goods-price">Цена: 3000 руб.</p>
-                    <button class="btn">Купить</button>
-                </div>
-
-                <div class="goods-item card text-center">
-                    <img src="../images/goods2.jpg" alt="Товар 2" class="goods-image">
-                    <h3 class="goods-title">Дыня</h3>
-                    <p class="goods-price">Цена: 2000 руб.</p>
-                    <button class="btn">Купить</button>
-                </div>
-
-                <div class="goods-item card text-center">
-                    <img src="../images/goods3.jpg" alt="Товар 3" class="goods-image">
-                    <h3 class="goods-title">Бананы</h3>
-                    <p class="goods-price">Цена: 750 руб.</p>
-                    <button class="btn">Купить</button>
-                </div>
-
-                <div class="goods-item card text-center">
-                    <img src="../images/goods4.jpg" alt="Товар 4" class="goods-image">
-                    <h3 class="goods-title">Клубника</h3>
-                    <p class="goods-price">Цена: 1200 руб.</p>
-                    <button class="btn">Купить</button>
+            <div class="goods-filters card">
+                <h3>Фильтры</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active">Все товары</button>
+                    <button class="filter-btn">Сезонные</button>
+                    <button class="filter-btn">Экзотические</button>
+                    <button class="filter-btn">По акции</button>
                 </div>
             </div>
+            
+            <div class="goods-grid">
+                <article class="goods-item card product-card">
+                    <div class="product-badge">🔥 Хит продаж</div>
+                    <img src="../images/goods1.jpg" alt="Сочный арбуз" class="goods-image">
+                    <div class="product-content">
+                        <h3 class="goods-title">Арбуз сахарный</h3>
+                        <p class="goods-description">Сочный и сладкий арбуз, идеален для жаркого лета</p>
+                        <div class="price-section">
+                            <span class="goods-price">3 000 ₽</span>
+                            <span class="goods-old-price">3 500 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span class="product-rating">⭐ 4.8</span>
+                            <span class="product-stock">📦 В наличии</span>
+                        </div>
+                        <button class="btn btn-buy">🛒 Добавить в корзину</button>
+                    </div>
+                </article>
+
+                <article class="goods-item card product-card">
+                    <div class="product-badge season">🍈 Сезон</div>
+                    <img src="../images/goods2.jpg" alt="Спелая дыня" class="goods-image">
+                    <div class="product-content">
+                        <h3 class="goods-title">Дыня медовая</h3>
+                        <p class="goods-description">Ароматная дыня с нежной мякотью</p>
+                        <div class="price-section">
+                            <span class="goods-price">2 000 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span class="product-rating">⭐ 4.6</span>
+                            <span class="product-stock">📦 В наличии</span>
+                        </div>
+                        <button class="btn btn-buy">🛒 Добавить в корзину</button>
+                    </div>
+                </article>
+
+                <article class="goods-item card product-card">
+                    <img src="../images/goods3.jpg" alt="Свежие бананы" class="goods-image">
+                    <div class="product-content">
+                        <h3 class="goods-title">Бананы спелые</h3>
+                        <p class="goods-description">Связка свежих бананов премиум-класса</p>
+                        <div class="price-section">
+                            <span class="goods-price">750 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span class="product-rating">⭐ 4.9</span>
+                            <span class="product-stock low">📦 Мало</span>
+                        </div>
+                        <button class="btn btn-buy">🛒 Добавить в корзину</button>
+                    </div>
+                </article>
+
+                <article class="goods-item card product-card">
+                    <div class="product-badge new">🆂 Новинка</div>
+                    <img src="../images/goods4.jpg" alt="Свежая клубника" class="goods-image">
+                    <div class="product-content">
+                        <h3 class="goods-title">Клубника альпийская</h3>
+                        <p class="goods-description">Свежая клубника с горных плантаций</p>
+                        <div class="price-section">
+                            <span class="goods-price">1 200 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span class="product-rating">⭐ 5.0</span>
+                            <span class="product-stock">📦 В наличии</span>
+                        </div>
+                        <button class="btn btn-buy">🛒 Добавить в корзину</button>
+                    </div>
+                </article>
+            </div>
         </main>
-        <footer class="footer">Футер</footer>
+        
+        <footer class="footer">
+            <p>&copy; 2024 Фруктовый рай. Свежие продукты каждый день.</p>
+        </footer>
     </div>
 </body>
 </html>
